@@ -5,7 +5,7 @@ qrun:
 
 test:
 
-install: rely
+install: #rely
 	smdcatalog
 clean:
 

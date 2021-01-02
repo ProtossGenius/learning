@@ -11,7 +11,7 @@
 
 # SubCatalog
 
-* [\<dir>my_jobs -> 我的工作](./my_jobs/README.md)
+* [\<dir>my_jobs -> 我做过的项目](./my_jobs/README.md)
 ---
 [<<< upper page](../README.md)
 ---

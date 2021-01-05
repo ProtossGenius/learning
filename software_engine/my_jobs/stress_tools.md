@@ -18,7 +18,7 @@ enum{
 	STATUS_RANDOM_MOVE_ING
 }
 
-func run(Player p){
+func run(Player p){ //每隔一段时间调用
 	switch(p.status){
 		case STATUS_START:
 			p.doLogin(); // 发送对应协议
@@ -27,7 +27,7 @@ func run(Player p){
 	}
 }
 
-func recv(Message msg, Player p){
+func recv(Message msg, Player p){ //服务器回包时的回调
 	switch(msg.id){
 		case MSGID_LOGIN_SUC:
 			p.status = STATUS_ENTER_GAME;
@@ -43,23 +43,24 @@ func recv(Message msg, Player p){
 ```
 struct Player{
 	// 保存用户信息
-	BlockMgr blockMgr //是一个数组,用来描述要做的事情列表
+	BlockMgr blockMgr //可以认为是一个动作数组,用来描述要做的事情列表
 }
 
-func (Player p) setStatusSuc(){
+// 转移状态
+func (Player p) setStatusSuc(){ 
+	...
 	p.blockMgr.goNext()
-	// 算出当前状态的成功值
 	if p.blockMgr.end(){
 		p.blockMgr = p.getNextBlockMgr()
 	}
 }
 
-func run(Player p){
-	statusDo(p.getStatus())
+func run(Player p){ // 同每隔一段时间执行一次
+	statusDo(p.getStatus()) // statusDo在下文定义
 }
 
-func recv(Message msg, Player p){
-	if statusRecv(msg, p){ // 吞下消息
+func recv(Message msg, Player p){ //同回调
+	if statusRecv(msg, p){ //当前状态需要处理的特征信息,吞下消息,定义于下文
 		return
 	}
 
@@ -85,7 +86,7 @@ func statusDo(Player p){
 	}	
 }
 
-func recvsDo(Message msg, Player p) (eatMsg bool) {
+func statusRecv(Message msg, Player p) (eatMsg bool) {
 	switch(p.getStatus()){
 		case STATUS_LOGIN:
 			return login_recv(msg, p)
@@ -95,7 +96,7 @@ func recvsDo(Message msg, Player p) (eatMsg bool) {
 	return false
 }
 
-/****************/
+/* 常量 */
 map[string]int StatusStrToConst = {
 	"STATUS_START" : STATUS_START,
 }
@@ -147,7 +148,9 @@ func newBlockMgrFromStr(string blockMgrConst) BlockMgr{
 // Blocks.go
 func blocksRandMove() BlockMgr{
 	BlockMgr res
-	// todo:
+	...
+	res.add(STATUS_LOGIN)
+	...
 	return res
 }
 
@@ -155,23 +158,30 @@ func blocksRandMove() BlockMgr{
 
 系统框架
 
-* 状态转移系统,如上
+* 状态转移系统,如上  内核
 
-* Player管理
+* Player管理         接口层,提供对外接口
 里面存了所有的Player,并且可以快速获得处于待命状态的Player以便给它们分配任务.
 
-* 组队管理
-这算是一个功能,提供了一个比较安全的组队策略.
+* 组队管理           ..
+这本不应是框架里的一层,算是一个功能,提供了一个比较安全的组队策略.
 
-* Web接口
+* 上报层             ..
+定义了一个接口用于上报信息,在不需要上报信息的情况下实现了了一个Null接口.
+
+* Web接口            表现层
 这部分不是我做的,通过URL来改变运行时状态,使用了Player管理里预留的接口
 
-* Script接口
+* Script接口         表现层
 定义了简单的按行解析的语法,可以避免Web调用(不过后来QA觉得URL已经足够好用了,只有我自己在用)
 
 
 ## 成效
 
-新增的时候只需要 打开工具->输入要新增的东西并生成代码->填空
+1. 简化编码工作
+新增的时候只需要 打开命令行工具->输入要新增的功能名并生成代码->填空
 删除的时候,以Status为例,找到对应的_ING后缀常量,将_ING删掉,重新生成代码即可
+
+2. 灵活性
+可以在运行时更改状态/实时查看机器人状态
 

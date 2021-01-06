@@ -20,7 +20,7 @@ enum{
 
 func run(Player p){ //每隔一段时间调用
 	switch(p.status){
-		case STATUS_START:
+		case STATUS_LOGIN:
 			p.doLogin(); // 发送对应协议
 			p.status = STATUS_LOGIN_ING
 			...

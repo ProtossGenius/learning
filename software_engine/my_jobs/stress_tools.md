@@ -29,7 +29,8 @@ func run(Player p){ //每隔一段时间调用
 
 func recv(Message msg, Player p){ //服务器回包时的回调
 	switch(msg.id){
-		case MSGID_LOGIN_SUC:
+		case MSGID_LOGIN_ING:
+			...
 			p.status = STATUS_ENTER_GAME;
 			...
 	}
@@ -46,7 +47,7 @@ struct Player{
 	BlockMgr blockMgr //可以认为是一个动作数组,用来描述要做的事情列表
 }
 
-// 转移状态
+// 将状态置为成功，如果当前动作组完成了从队列获取下一个工作组
 func (Player p) setStatusSuc(){ 
 	...
 	p.blockMgr.goNext()

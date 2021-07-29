@@ -1,7 +1,9 @@
 # 初学者内容包
 
 1. Starter Content中的素材 内容浏览器\>添加内容\>内容包\>Start Content
-|文件夹名|内容|详情
+
+|文件夹名|内容|详情|
+|-|-|-|
 Architecture|建筑模型|
 Audio|声音|
 Bluepoints|蓝图|

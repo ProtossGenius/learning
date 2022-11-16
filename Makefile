@@ -10,4 +10,4 @@ install: #rely
 clean:
 
 rely: # if smdcatalog not exist.
-	go get github.com/ProtossGenius/smntools/cmd/smdcatalog
+	go install github.com/ProtossGenius/smntools/cmd/smdcatalog@latest

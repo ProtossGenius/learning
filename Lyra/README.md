@@ -9,6 +9,7 @@
 
 # SubCatalog
 
+* [\<dir>GameEffect -> GameEffect](./GameEffect/README.md)
 * [\<dir>GamePhase -> 游戏流程](./GamePhase/README.md)
 * [\<dir>configs -> 配置](./configs/README.md)
 * [\<dir>subsystem -> 子系统](./subsystem/README.md)

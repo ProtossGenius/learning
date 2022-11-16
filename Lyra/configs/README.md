@@ -8,6 +8,8 @@
 ---
 [<<< upper page](../README.md)
 ---
+* [\<file>config_execute.md -> 配置执行顺序](./config_execute.md)
+* [\<file>teamscore.md -> 组队死亡匹配分数](./teamscore.md)
 
 # SubCatalog
 

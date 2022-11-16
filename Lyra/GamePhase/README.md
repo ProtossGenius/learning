@@ -26,7 +26,8 @@
 [<<< upper page](../README.md)
 ---
 * [\<file>LyraGamePhaseAbility.md -> 游戏流程活动父类](./LyraGamePhaseAbility.md)
-* [\<file>phase_playing.md -> 游戏流程](./phase_playing.md)
+* [\<file>phase_playing.md -> 游戏步骤-游戏中](./phase_playing.md)
+* [\<file>phase_post.md -> 游戏流程-POST游戏](./phase_post.md)
 * [\<file>phase_warmup.md -> 流程步骤-热身](./phase_warmup.md)
 
 # SubCatalog

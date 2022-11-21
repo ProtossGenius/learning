@@ -1,5 +1,7 @@
 # 流程步骤-热身
 
+蓝图 Phase_Warmup
+
 1. ApplyEffectToAll [GE_PregameLobby](../GameEffect/GE_PregameLobby.md) 
 2. 广播ShooterGame.GamePhase.MatchBeginCountdown到所有客户端
 3. RemoveEffectFromAll [GE_PregameLobby](../GameEffect/GE_PregameLobby.md)
